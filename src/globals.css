@@ -1,0 +1,534 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'CS-Reg';
+    src: url(./fonts/CherrySwash-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'CS-Bold';
+    src: url(./fonts/CherrySwash-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'I-Reg';
+    src: url(./fonts/Inter-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'I-Med';
+    src: url(./fonts/Inter-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'I-Bold';
+    src: url(./fonts/Inter-Bold.ttf);
+}
+
+.font-CS-Reg {
+    font-weight: 400;
+}
+
+.font-СS-Bold {
+    font-weight: 700;
+}
+
+.font-I-Reg {
+    font-weight: 400;
+}
+
+.font-I-Med {
+    font-weight: 500;
+}
+
+.font-I-Bold {
+    font-weight: 700;
+}
+
+.white-block {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+    padding-top: 30px;
+    padding-bottom: 60px;
+    color: #1D27A4;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: -60px;
+}
+
+.overlay-block {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+    color: #1D27A4;
+    width: 139px;
+    
+}
+
+.overlay:hover {
+    display: block;
+}
+
+.profile:hover .overlay {
+    display: block;
+}
+
+.button_order {
+    border-radius: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 16px;
+    font-family: I-Med;
+    border: 3px solid transparent;
+    box-sizing: border-box;
+}
+
+.button_active {
+    background-color: #5965F9;
+    color: white;
+    pointer-events: none;
+    transition-duration: 400ms;
+}
+
+.button_inactive {
+    background-color: transparent;
+    color: #1D27A4;
+    border: 3px solid #5965F9;
+    transition-duration: 400ms;
+}
+
+.button {
+    background-color: #5965F9;
+    font-size: 20px;
+    font-family: I-Med;
+    color: white;
+    border: 3px solid transparent;
+    box-sizing: border-box;
+}
+
+.button:hover {
+    background-color: transparent;
+    font-size: 20px;
+    font-family: I-Med;
+    color: #1D27A4;
+    border: 3px solid #5965F9;
+    box-sizing: border-box;
+    transition-duration: 400ms;
+}
+
+.button:hover .cart {
+    stroke: #1D27A4;
+    transition-duration: 500ms;
+}
+
+.button:hover .trash {
+    stroke: #1D27A4;
+    transition-duration: 500ms;
+}
+
+.button:hover .add {
+    stroke: #1D27A4;
+    transition-duration: 500ms;
+}
+
+.button:hover .save {
+    fill: #1D27A4;
+    transition-duration: 500ms;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url(./images/Calendar.svg);
+    color: #1D27A4;
+    fill: #1D27A4;
+}
+
+.radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.radio label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor:pointer;
+    font-size: 14px;
+    user-select: none;
+}
+
+.radio span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border: 2px solid #1D27A4;
+    border-radius: 50%;
+}
+
+.radio label input:checked ~ span {
+    background-color: white;
+    border: 2px solid #1D27A4;
+}
+
+.radio span::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radio label input:checked ~ span:after {
+    display: block;
+}
+
+.radio label span:after {
+    top: 5px;
+    left: 5px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #1D27A4;
+}
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkbox span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: white;
+    border: 2px solid #1D27A4;
+    border-radius: 6px;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .checkbox:hover input ~ span {
+    background-color:#C9CDFF;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .checkbox input:checked ~ span {
+    background-color: #1D27A4;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkbox span:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox input:checked ~ span:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .checkbox span:after {
+    left: 6.5px;
+    top: 1px;
+    width: 7px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+
+  .modal.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal__content {
+    padding-top: 30px;
+    padding-bottom: 60px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+  }
+
+  .catalog {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+    color: #1D27A4;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+  }
+
+  .catalog:hover {
+    background-color: rgba(255,255,255,0.8);
+    transition-duration: 300ms;
+  }
+
+  .horizontal-slider {
+    width: 100%;
+    max-width: 160px;
+    height: 3px;
+    border-radius: 3px;
+}
+
+.horizontal-slider .example-track {
+    height: 3px;
+    border-radius: 3px;
+}
+
+.example-track.example-track-0 {
+    background: #8D96FF;
+}
+
+.example-track.example-track-1 {
+    background: #1D27A4;
+}
+
+.example-track.example-track-2 {
+    background: #8D96FF;
+}
+
+.example-thumb {
+    background-color: white;
+    cursor: pointer;
+    border: 2px solid #1D27A4;
+    box-sizing: border-box;
+}
+
+.example-thumb:focus-visible {
+  outline: none;
+}
+
+.horizontal-slider .example-thumb {
+    top: -9px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+ .example-thumb.example-thumb-0 {
+   left: 5px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+  color: #1D27A4;
+}
+
+/* Селект с категориями */
+
+.custom-select__control {
+    border-radius: 30px !important;
+    min-height: 42px !important;
+    border: 3px solid #8D96FF !important;
+    width: 228px !important;
+}
+
+.custom-select__value-container {
+    padding-left: 15px !important;
+}
+
+.custom-select__placeholder {
+    font-family: I-Reg !important;
+    font-size: 14px !important;
+    color: #1D27A4 !important; 
+}
+
+.custom-select__single-value {
+    font-family: I-Reg !important;
+    font-size: 14px !important;
+    color: #1D27A4 !important;
+}
+
+.custom-select__control--menu-is-open {
+    border: 3px solid #8D96FF !important;
+}
+
+.custom-select__control--is-focused {
+    box-shadow: none !important ;
+}
+
+.custom-select__indicators {
+    cursor: pointer !important;
+}
+
+.custom-select__indicator {
+    color: #1D27A4 !important;
+}
+
+.custom-select__indicator:hover {
+    color: #5965F9 !important;
+}
+
+.custom-select__indicator-separator {
+    display: none !important;
+}
+
+.custom-select__menu {
+    color: #1D27A4!important;
+    border-radius: 30px !important;
+}
+
+.custom-select__menu-list {
+    padding: 0 !important;
+    border-radius: 30px !important;
+}
+
+.custom-select__option--is-focused {
+    background-color: #C9CDFF !important;
+}
+
+.custom-select__option--is-selected {
+    background-color: #5965F9 !important;
+    color: white !important;
+}
+
+/* Селект с товарами */
+
+.custom-select2__control {
+    border-radius: 30px !important;
+    min-height: 42px !important;
+    border: 3px solid #8D96FF !important;
+    width: 312px !important;
+}
+
+.custom-select2__value-container {
+    padding-left: 15px !important;
+}
+
+.custom-select2__placeholder {
+    font-family: I-Reg !important;
+    font-size: 14px !important;
+    color: #1D27A4 !important; 
+}
+
+.custom-select2__single-value {
+    font-family: I-Reg !important;
+    font-size: 14px !important;
+    color: #1D27A4 !important;
+}
+
+.custom-select2__control--menu-is-open {
+    border: 3px solid #8D96FF !important;
+}
+
+.custom-select2__control--is-focused {
+    box-shadow: none !important ;
+}
+
+.custom-select2__indicators {
+    cursor: pointer !important;
+}
+
+.custom-select2__indicator {
+    color: #1D27A4 !important;
+}
+
+.custom-select2__indicator:hover {
+    color: #5965F9 !important;
+}
+
+.custom-select2__indicator-separator {
+    display: none !important;
+}
+
+.custom-select2__menu {
+    color: #1D27A4!important;
+    border-radius: 30px !important;
+}
+
+.custom-select2__menu-list {
+    padding: 0 !important;
+    border-radius: 30px !important;
+}
+
+.custom-select2__option--is-focused {
+    background-color: #C9CDFF !important;
+}
+
+.custom-select2__option--is-selected {
+    background-color: #5965F9 !important;
+    color: white !important;
+}
+
+.product_image {
+    width: 220px;
+    height: 152px;
+    border-radius: 12px;
+    border: 2px solid;
+    object-fit: cover;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    color: #1D27A4;
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+.swiper-button-disabled {
+    fill: #8D96FF;
+    pointer-events: none;
+}
