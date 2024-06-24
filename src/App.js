@@ -25,8 +25,10 @@ import Create_news from "./pages/Create_news";
 import Change_news from "./pages/Change_news";
 import User_messages from "./pages/User_messages";
 import RichTextEditor from "./components/RichTextEditor";
-import SimpleSlider from "./components/Slider";
+import PrivateRoute from "./utils/PrivateRoute"
 import axios from "axios";
+import Security from "./pages/Security";
+import AdminRoute from "./utils/AdminRoute";
 
 function App() {
   return (
@@ -44,13 +46,26 @@ function App() {
           <Route path="catalog" element={<Catalog/>}/>
           <Route path="catalog/:category" element={<SubCatalog/>}/>
           <Route path="catalog/:category/:id" element={<Product/>}/>
-          <Route path="profile" element={<PersonalData/>}/>
-          <Route path="orders" element={<Orders/>}/>
+          <Route element={<PrivateRoute/>}>
+            <Route path="profile" element={<PersonalData/>}/>
+          </Route>
+          <Route element={<PrivateRoute/>}>
+            <Route path="orders" element={<Orders/>}/>
+          </Route>
+          <Route element={<PrivateRoute/>}>
+            <Route path="security" element={<Security/>}/>
+          </Route>
+
+          
+
           <Route path="about" element={<About/>}/>
           <Route path="shipping" element={<Shipping/>}/>
           <Route path="contacts" element={<Contacts/>}/>
           <Route path="not-found" element={<Notfound/>}/>
-          <Route path="admin-panel" element={<Admin/>}/>
+
+          <Route element={<AdminRoute/>}>
+            <Route path="admin-panel" element={<Admin/>}/>
+          </Route>
           <Route path="delete_product" element={<Delete_product/>}/>
           <Route path="create_product" element={<Create_product/>}/>
           <Route path="change_product" element={<Change_product/>}/>
@@ -58,8 +73,8 @@ function App() {
           <Route path="create_news" element={<Create_news/>}/>
           <Route path="change_news" element={<Change_news/>}/>
           <Route path="feedback" element={<User_messages/>}/>
+          
           <Route path="editor" element={<RichTextEditor/>}/>
-          <Route path="slider" element={<SimpleSlider/>}/>
         </Route>
       </Routes>
       </BrowserRouter>

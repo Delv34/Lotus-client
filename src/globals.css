@@ -60,7 +60,7 @@
     display: none;
     position: absolute;
     top: 20px;
-    left: -60px;
+    left: -70px;
 }
 
 .overlay-block {
@@ -68,7 +68,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
     color: #1D27A4;
-    width: 139px;
+    width: 158px;
     
 }
 
