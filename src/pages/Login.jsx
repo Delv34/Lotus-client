@@ -9,7 +9,7 @@ import { useAuthStore } from "../store";
 
 const Login = ()=> {
 
-    const server_url = process.env.REACT_APP_SERVER_URL
+    const server_url = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL2
 
     const {
         register,

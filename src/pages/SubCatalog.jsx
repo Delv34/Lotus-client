@@ -14,8 +14,10 @@ const SubCatalog = ()=> {
     const [kind, setKind] = useState([]);
     const [products, setProducts] = useState([]);
 
+    const server_url = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL2
+
     useEffect(()=> {
-        axios.get(process.env.REACT_APP_SERVER_URL + "/" + category).then(response => {
+        axios.get(server_url + "/" + category).then(response => {
             const products = response.data
             console.log(products)
             setFilling(products[0].filling)

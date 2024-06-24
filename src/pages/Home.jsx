@@ -20,8 +20,10 @@ const Home = ()=> {
 
     const [products, setProducts] = useState([])
 
+    const server_url = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL2
+
     useEffect(()=> {
-        axios.get(process.env.REACT_APP_SERVER_URL + "/popular").then(response => {
+        axios.get(server_url + "/popular").then(response => {
             const products = response.data
             console.log(products)
             setProducts(products)

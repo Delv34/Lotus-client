@@ -19,8 +19,10 @@ const Product = ()=> {
     const [img2, setImg2] = useState("");
     const [img3, setImg3] = useState("");
 
+    const server_url = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL2
+
     useEffect(()=> {
-        axios.get(process.env.REACT_APP_SERVER_URL + "/" + category + "/" + id).then(response => {
+        axios.get(server_url + "/" + category + "/" + id).then(response => {
             console.log(response)
             const product = response.data
             console.log(product.images[0])

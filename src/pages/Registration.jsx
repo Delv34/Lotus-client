@@ -9,7 +9,7 @@ import useToken from "../store";
 
 const Registration = ()=> {
 
-    const server_url = process.env.REACT_APP_SERVER_URL
+    const server_url = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL2
 
     // const useUserStore = create((set) => ({
     //     token: "",
