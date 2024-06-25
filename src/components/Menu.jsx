@@ -67,7 +67,6 @@ return (
                                     <div className="flex flex-col">
                                     <Link to="/orders" className="font-I-Reg mb-[8px] hover:text-[#3A49FF]">Заказы</Link> 
                                     <Link to="/profile" className="font-I-Reg mb-[8px] hover:text-[#3A49FF]">Личные данные</Link> 
-                                    <Link to="/security" className="font-I-Reg mb-[8px] hover:text-[#3A49FF]">Безопасность</Link> 
                                     <div onClick={()=> {
                                         localStorage.removeItem("token")
                                         localStorage.removeItem("role")

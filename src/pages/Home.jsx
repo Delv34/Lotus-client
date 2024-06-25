@@ -127,7 +127,7 @@ const Home = ()=> {
                                     return(
                                         <div className="flex flex-col items-center h-[281px]">
                                             <div className="relative mb-[10px]">
-                                                <img className="object-cover w-[220px] h-[148px] rounded-[12px]" src={require("../images/products" + product.images[0])} alt="" />
+                                                <Link to={"/catalog/" + product.category + "/" + product._id}><img className="object-cover w-[220px] h-[148px] rounded-[12px]" src={require("../images/products" + product.images[0])} alt="" /></Link>
                                                 <Heart className="stroke-[#1D27A4] hover:fill-[#1D27A4] cursor-pointer absolute top-[15px] right-[15px]"/>
                                             </div>
                                             <div className="flex flex-col justify-between h-full">

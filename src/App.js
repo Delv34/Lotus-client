@@ -26,8 +26,6 @@ import Change_news from "./pages/Change_news";
 import User_messages from "./pages/User_messages";
 import RichTextEditor from "./components/RichTextEditor";
 import PrivateRoute from "./utils/PrivateRoute"
-import axios from "axios";
-import Security from "./pages/Security";
 import AdminRoute from "./utils/AdminRoute";
 
 function App() {
@@ -38,7 +36,6 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>}/>
           <Route path="registration" element={<Registration/>}/>
-          <Route path="registration2" element={<Registration2/>}/>
           <Route path="*" element={<Notfound/>}/>
           <Route path="login" element={<Login/>}/>
           <Route path="cart" element={<Cart/>}/>
@@ -52,10 +49,6 @@ function App() {
           <Route element={<PrivateRoute/>}>
             <Route path="orders" element={<Orders/>}/>
           </Route>
-          <Route element={<PrivateRoute/>}>
-            <Route path="security" element={<Security/>}/>
-          </Route>
-
           
 
           <Route path="about" element={<About/>}/>

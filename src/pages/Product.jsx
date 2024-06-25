@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactImageZoom from 'react-image-zoom'
-import test_cake from "../images/test_cake.png"
-import large_img from "../images/large_img.png"
-import about1 from "../images/about1.png"
-import about2 from "../images/about2.png"
 import { ReactComponent as Heart} from "../images/Heart.svg"
 import { ReactComponent as Cart } from "../images/Cart.svg"
+import {ReactComponent as Trash} from "../images/Trash.svg"
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -18,6 +15,21 @@ const Product = ()=> {
     const [img1, setImg1] = useState("");
     const [img2, setImg2] = useState("");
     const [img3, setImg3] = useState("");
+    const [isAdd, setIsAdd] = useState(false)
+    const [isFav, setIsFav] = useState(false)
+    let favorites = []
+    if (JSON.parse(localStorage.getItem('favorites')) != null) {
+        favorites = JSON.parse(localStorage.getItem('favorites'))
+    }
+    let cart = [] 
+    if (JSON.parse(localStorage.getItem('cart')) != null) {
+        cart = JSON.parse(localStorage.getItem('cart'))
+    }
+
+    const getCart = item => cart.find(i => i._id == item._id)
+    const delCart = cart.filter(i => i._id !== id);
+    const getFavorite = item => favorites.find(i => i._id == item._id) 
+    const delFavorite = favorites.filter(i => i._id !== id);
 
     const server_url = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL2
 
@@ -61,11 +73,43 @@ const Product = ()=> {
                             <div className="font-I-Regular text-[16px]">{product.weight > 1000 ? product.weight/1000 : product.weight} {product.weight > 1000 ? "кг" : "г"}</div>
                         </div>
                         <div className="flex items-center mb-[30px] gap-[20px]">
-                            <button className="button rounded-[30px] px-[33px] py-[5px] flex items-center justify-center text-[16px]">
-                                <Cart className="cart stroke-white mr-[10px]"/>
-                                В корзину
-                            </button>
-                            <Heart className="stroke-[#1D27A4] hover:fill-[#1D27A4] cursor-pointer"/>
+
+                            {/* Добавление в корзину */}
+
+                            {   
+
+                                getCart(product) ? <button onClick={()=> {
+                                    localStorage.setItem("cart", JSON.stringify(delCart))
+                                    setIsAdd(false)
+                                }} className="button rounded-[30px] px-[33px] py-[5px] flex items-center justify-center text-[16px]">
+                                    <Trash className="cart stroke-white mr-[10px]"/>
+                                    Удалить
+                                </button> : <button onClick={()=> {
+                                    cart.push(product)
+                                    localStorage.setItem("cart", JSON.stringify(cart))
+                                    setIsAdd(true)
+                                }} className="button rounded-[30px] px-[33px] py-[5px] flex items-center justify-center text-[16px]">
+                                    <Cart className="cart stroke-white mr-[10px]"/>
+                                    В корзину
+                                </button>
+                            }
+
+                                {/* Добавление в избранное */}
+
+                            {
+                                getFavorite(product) ? <Heart onClick={()=>{
+                                    localStorage.setItem("favorites", JSON.stringify(delFavorite))
+                                    setIsFav(false)
+                                }} className="stroke-[#1D27A4] fill-[#1D27A4] cursor-pointer"/> : <Heart onClick={()=>{
+                                    favorites.push(product)
+                                    localStorage.setItem("favorites", JSON.stringify(favorites))
+                                    // getFavorite(product)
+                                    setIsFav(true)
+                                    console.log(isFav)
+                                    console.log(favorites)
+                                    console.log(favorites.slice())
+                                }} className="stroke-[#1D27A4] hover:fill-[#1D27A4] cursor-pointer"/>
+                            }
                         </div>
                         <div className="font-I-Med text-[16px] mb-[15px]">Пищевая ценность на 100 г</div>
                         <div className="flex gap-[25px]">

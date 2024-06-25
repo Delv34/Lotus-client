@@ -40,7 +40,7 @@ const Registration = ()=> {
         .then((response)=> {
             setData(response.data)
             localStorage.setItem("token", response.data.token)
-            response.data.token ? window.location.href = '/registration2' : <></>
+            response.data.token ? window.location.href = '/orders' : <></>
             // setToken(response.data.token)
             
         })

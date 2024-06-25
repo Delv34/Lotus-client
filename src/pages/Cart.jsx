@@ -69,7 +69,7 @@ const Cart = ()=> {
             <div className="flex flex-col items-center justify-end flex-grow">
                 <div className="font-I-Reg text-[20px] mt-[40px]">5 товаров</div>
                 <div className="font-I-Bold text-[20px] mb-[20px]">25000 ₽</div>
-                <button type="submit" className="button py-[13px] rounded-[30px] flex items-center justify-center w-[220px]">Оформить заказ</button>
+                <Link to="/orders"><button type="submit" className="button py-[13px] rounded-[30px] flex items-center justify-center w-[220px]">Оформить заказ</button></Link>
             </div>
         </div>
         </div>

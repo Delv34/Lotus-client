@@ -14,6 +14,22 @@ export const useAuthStore = create ((set)=> ({
   }
 }))
 
+export const useFavoriteStore = create((set, get) => ({
+    favorites: [],
+    isFav: false,
+    addFavorites: (product) => set((state)=> ({favorites: state.favorites.slice().push(product)})),
+    delFavorites: (product) => set((state)=> ({favorites: state.favorites.slice().filter(t => t._id != product._id)})),
+    getFavorites: (id) => set((state)=> ({isFav: state.favorites.slice().find(i => i._id == id) == true}))
+  }))
+
+export const useCartStore = create((set) => ({
+    cart: [],
+    isCart: false,
+    addCart: (product) => set((state)=> ({cart: [...state.cart, product]})),
+    delCart: (product) => set((state)=> ({cart: state.cart.filter(t => t.id != product._id)})),
+    getCart: (id) => set((state)=> ({isCart: state.cart.find(i => i._id == id) != undefined}))
+  }))
+
 //  const useToken = create((set) => ({
 //     token: "",
 //     setToken: (tokenvalue) => set((state)=>({
@@ -21,22 +37,6 @@ export const useAuthStore = create ((set)=> ({
 //         ...state.token
 //     })),
 //     delToken: () => set({token: ""}),
-//   }))
-
-//   const useFavorite = create((set, get) => ({
-//     favorites: [],
-//     addFavorites: (product) => set({favorites: favorites.push(product)}),
-//     delFavorites: (product) => {
-//         const newFavorites = get().favorites.filter(t => t.id !== id)
-//     }
-    
-//   }))
-
-//   const useCart = create((set, get) => ({
-//     cart: [],
-//     increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-//     removeAllBears: () => set({ bears: 0 }),
-//     updateBears: (newBears) => set({ bears: newBears }),
 //   }))
 
 //   const useOrders = create((set) => ({

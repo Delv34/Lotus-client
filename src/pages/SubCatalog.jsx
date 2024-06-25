@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import ReactSlider from "react-slider";
 import {ReactComponent as Heart} from "../images/Heart.svg"
 import {ReactComponent as Cart} from "../images/Cart.svg"
-import card_cake from "../images/card_cake.png"
-import alex from '../images/products/alex.jpg'
+import {ReactComponent as Trash} from "../images/Trash.svg"
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { useCartStore, useFavoriteStore } from "../store";
 
 const SubCatalog = ()=> {
      const category = useParams().category
@@ -13,6 +13,40 @@ const SubCatalog = ()=> {
     const [filling, setFilling] = useState([]);
     const [kind, setKind] = useState([]);
     const [products, setProducts] = useState([]);
+    const [id, setId] = useState("")
+    const [idCart, setIdCart] = useState("")
+
+    const [isAdd, setIsAdd] = useState(false)
+    const [isFav, setIsFav] = useState(false)
+
+    let favorites = []
+    if (JSON.parse(localStorage.getItem('favorites')) != null) {
+        favorites = JSON.parse(localStorage.getItem('favorites'))
+    }
+    let cart = [] 
+    if (JSON.parse(localStorage.getItem('cart')) != null) {
+        cart = JSON.parse(localStorage.getItem('cart'))
+    }
+
+    // const addFavorites = useFavoriteStore((state)=> state.addFavorites)
+    // const delFavorites = useFavoriteStore((state)=> state.delFavorites)
+    // const getFavorites = useFavoriteStore((state)=> state.getFavorites)
+    // getFavorites(idFav)
+    // const isFavorites = useFavoriteStore((state)=> state.isFav)
+
+    // const addCart = useCartStore((state)=> state.addCart)
+    // const delCart = useCartStore((state)=> state.delCart)
+    // const getCart = useCartStore((state)=> state.getCart)
+    // const cart = useCartStore((state)=> state.cart)
+    // getCart(idCart)
+    // const isCart = useCartStore((state)=> state.isCart)
+
+
+
+    const getCart = item => cart.find(i => i._id == item._id)
+    const delCart = cart.filter(i => i._id !== id);
+    const getFavorite = item => favorites.find(i => i._id == item._id) 
+    const delFavorite = favorites.filter(i => i._id !== id);
 
     const server_url = process.env.REACT_APP_SERVER_URL || process.env.REACT_APP_SERVER_URL2
 
@@ -108,7 +142,24 @@ const SubCatalog = ()=> {
                                 <div key={product.name} className="card flex flex-col item-center w-[250px] h-[318px] pb-[20px]">
                                     <div className="relative">
                                         <Link to={"/catalog/" + category + "/" + product._id}><img src={require("../images/products" + product.images[0])} className="w-[250px] h-[168px] object-cover rounded-t-[12px]" /></Link>
-                                        <Heart className="stroke-[#1D27A4] hover:fill-[#1D27A4] cursor-pointer absolute top-[15px] right-[15px]"/>
+
+                                        {/* Добавление в избранное */}
+
+                                        {
+                                            getFavorite(product) ?
+                                            <Heart onClick={()=>{
+                                                // delFavorites(product)
+                                                localStorage.setItem("favorites", JSON.stringify(delFavorite))
+                                                setIsFav(false)
+                                            }} className="stroke-[#1D27A4] fill-[#1D27A4] cursor-pointer absolute top-[15px] right-[15px]"/>
+                                            : <Heart onClick={()=>{
+                                                // addFavorites(product)
+                                                favorites.push(product)
+                                                localStorage.setItem("favorites", JSON.stringify(favorites))
+                                                setId(product._id)
+                                                setIsFav(true)
+                                            }} className="stroke-[#1D27A4] hover:fill-[#1D27A4] cursor-pointer absolute top-[15px] right-[15px]"/>
+                                        }
                                     </div>
                                     <div className="flex flex-col justify-between items-center h-full px-[15px] pt-[10px]">
                                         <div className="font-I-Reg text-[16px]">{product.name}</div>
@@ -116,11 +167,33 @@ const SubCatalog = ()=> {
                                             <div className="flex w-full gap-[10px] mb-[10px]">
                                                 <div className="font-I-Med text-[14px]">{product.price} ₽</div>
                                                 <div className="font-I-Reg text-[14px]">{product.weight > 1000 ? product.weight/1000 : product.weight} {product.weight > 1000 ? "кг" : "г"}</div>
-                                            </div>   
-                                            <button className="button rounded-[30px] w-[220px] py-[5px] flex items-center justify-center">
+                                            </div>
+
+                                                {/* Добавление в корзину */}
+
+                                            {
+                                                getCart(product) ? <button onClick={()=> {
+                                                    // delCart(product)
+                                                    localStorage.setItem("cart", JSON.stringify(delCart))
+                                                    setIsAdd(false)
+                                                }} className="button rounded-[30px] w-[220px] py-[5px] flex items-center justify-center">
+                                                <Trash className="cart stroke-white mr-[10px]"/>
+                                                <div className="text-[16px]">Удалить</div>
+                                            </button> : <button onClick={()=> {
+                                                    // addCart(product)
+                                                    cart.push(product)
+                                                    localStorage.setItem("cart", JSON.stringify(cart))
+                                                    // console.log("Проверка на начилие", getCart(product._id))
+                                                    getCart(product)
+                                                    // console.log("Содержимое массива",cart)
+                                                    setId(product._id)
+                                                    setIsAdd(true)
+                                                }} className="button rounded-[30px] w-[220px] py-[5px] flex items-center justify-center">
                                                 <Cart className="cart stroke-white mr-[10px]"/>
                                                 <div className="text-[16px]">В корзину</div>
                                             </button>
+                                            }   
+                                            
                                         </div>
                                     </div>
                                 </div>

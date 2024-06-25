@@ -25,7 +25,7 @@ const Login = ()=> {
             setData(response.data)
             localStorage.setItem("token", response.data.token)
             localStorage.setItem("role", response.data.role)
-            console.log(response.data.role)
+            console.log(response.data.token)
             response.data.token ? response.data.role == "ADMIN" ? window.location.href = '/admin-panel' : window.location.href = '/orders' : <></>
             // setToken(response.data.token)
             // console.log(useToken((state)=> state.token))
@@ -39,7 +39,6 @@ const Login = ()=> {
         const [password, setPassword] = useState(false)
         const [data, setData] = useState("")
 
-        const addToken = useAuthStore((state)=> state.addToken)
     return (
         <>
         <div className="background flex items-center justify-center white-block px-[40px] min-w-[980px]">

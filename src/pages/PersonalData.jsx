@@ -5,6 +5,7 @@ import { ReactComponent as Required } from "../images/Required.svg"
 const PersonalData = ()=> {
 
     const [isVisible, setVisible] = useState (false)
+    const [password, setPassword] = useState(false)
 
     return (
         <div className="flex justify-center">
